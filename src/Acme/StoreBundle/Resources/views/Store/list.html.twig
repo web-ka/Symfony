@@ -1,0 +1,15 @@
+{% block title %}<h1>List of database entries</h1>{% endblock %}
+
+{% block body %}
+    <table border="5">
+    {% for entry in product %}
+        <tr>
+        <td>{{ entry.id }}</td>
+        <td>{{ entry.name }}</td>
+        <td>{{ entry.price }}</td>
+        <td>{{ entry.description }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

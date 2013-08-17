@@ -1,0 +1,21 @@
+acme_home:
+    pattern:  /storehome
+    defaults: { _controller: AcmeStoreBundle:Default:index }
+
+acme_create:
+    pattern: /store
+    defaults: { _controller: AcmeStoreBundle:Store:create }
+
+acme_show:
+    pattern: /show/{id}
+    defaults: { _controller: AcmeStoreBundle:Store:show, id: 1 }
+    requirements:
+            id:  \d+
+
+acme_update:
+    pattern: /update/{id}
+    defaults: { _controller: AcmeStoreBundle:Store:update }
+
+acme_list:
+    pattern: /list
+    defaults: { _controller: AcmeStoreBundle:Store:list }
