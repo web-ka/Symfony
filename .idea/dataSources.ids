@@ -19,12 +19,21 @@
       </library>
     </libraries>
     <schema name="" catalog="symfony"/>
+    <table name="Category" schema="" catalog="symfony" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_D34A04AD12469DE2" table="product" schema="" catalog="symfony" columns="category_id"/>
+    </table>
     <table name="product" schema="" catalog="symfony" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
       <column name="price" sqlType="DECIMAL" length="10" precision="2" nullable="false" jdbcType="3"/>
       <column name="description" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="category_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_D34A04AD12469DE2" columns="category_id" ref-table="Category" ref-schema="" ref-catalog="symfony" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="IDX_D34A04AD12469DE2" unique="false" columns="category_id"/>
     </table>
   </data-source>
 </component>

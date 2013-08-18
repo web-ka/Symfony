@@ -28,6 +28,14 @@ class StoreController extends Controller
             ->getRepository('AcmeStoreBundle:Product')
             ->find($id);
 
+        //$categoryName = $product->getCategory()->getName();
+
+        /*$product = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Product')
+            ->findOneByIdJoinedToCategory($id);
+
+        $category = $product->getCategory();*/
+
         if (!$product) {
             throw $this->createNotFoundException(
                 'No product found for id '.$id
@@ -51,7 +59,6 @@ class StoreController extends Controller
             );
         }
 
-        $product->setName('New product name!');
         $em->flush();
 
         return $this->redirect($this->generateUrl('acme_home'));
@@ -59,19 +66,31 @@ class StoreController extends Controller
 
     public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('AcmeStoreBundle:Product')
-            ->findAllOrderedByName();
+    //    $em = $this->getDoctrine()->getManager();
+    //    $product = $em->getRepository('AcmeStoreBundle:Product')
+    //        ->findAllOrderedByName();
+
     //    $product = $this->getDoctrine()
     //        ->getRepository('AcmeStoreBundle:Product')
     //        ->findAll();
-        $em = $this->getDoctrine()->getManager(); //return good with price more than entered value
-        $query = $em->createQuery(
-            'SELECT p
-            FROM AcmeStoreBundle:Product p
-            WHERE p.price > :price
-            ORDER BY p.price ASC'
-        )->setParameter('price', '11,99');
+
+    //    $em = $this->getDoctrine()->getManager(); //return good with price more than entered value
+    //    $query = $em->createQuery(
+    //        'SELECT p
+    //        FROM AcmeStoreBundle:Product p
+    //        WHERE p.price > :price
+    //        ORDER BY p.price ASC'
+    //    )->setParameter('price', '11,99');
+    //    $product = $query->getResult();
+
+        $repository = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Product');
+
+        $query = $repository->createQueryBuilder('p')
+            ->where('p.price > :price')
+            ->setParameter('price', '10.99')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery();
 
         $product = $query->getResult();
 

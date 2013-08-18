@@ -6,9 +6,19 @@ acme_create:
     pattern: /store
     defaults: { _controller: AcmeStoreBundle:Store:create }
 
+acme_createproduct:
+    pattern: /storeproduct
+    defaults: { _controller: AcmeStoreBundle:Default:createProduct }
+
 acme_show:
     pattern: /show/{id}
     defaults: { _controller: AcmeStoreBundle:Store:show, id: 1 }
+    requirements:
+            id:  \d+
+
+acme_showproduct:
+    pattern: /showproduct/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:showProduct, id: 1 }
     requirements:
             id:  \d+
 
