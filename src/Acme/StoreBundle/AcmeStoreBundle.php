@@ -9,3 +9,4 @@ class AcmeStoreBundle extends Bundle
 {
 }
 
+//и здесь тебе привет
